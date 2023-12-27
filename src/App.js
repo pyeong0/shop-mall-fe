@@ -6,12 +6,14 @@ import { userActions } from "./action/userAction";
 import "./style/common.style.css";
 import AppLayout from "./Layout/AppLayout";
 import AppRouter from "./routes/AppRouter";
+import Footer from "./footer";
 
 function App() {
   return (
     <div>
       <AppLayout>
         <AppRouter />
+        <Footer />
       </AppLayout>
     </div>
   );

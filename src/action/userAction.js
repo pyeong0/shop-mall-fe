@@ -4,39 +4,39 @@ import { commonUiActions } from "./commonUiAction";
 import * as commonTypes from "../constants/commonUI.constants";
 const loginWithToken = () => async (dispatch) => {
   try {
-    dispatch({type:types.LOGIN_WITH_TOKEN_REQUEST});
+    dispatch({ type: types.LOGIN_WITH_TOKEN_REQUEST });
     const response = await api.get("/user/me");
-    if(response.status !== 200) throw new Error(response.error)
+    if (response.status !== 200) throw new Error(response.error);
     console.log("rrr", response);
     dispatch({
       type: types.LOGIN_WITH_TOKEN_SUCCESS,
       payload: response.data,
     });
   } catch (error) {
-    dispatch({ type: types.LOGIN_WITH_TOKEN_FAIL});
+    dispatch({ type: types.LOGIN_WITH_TOKEN_FAIL });
     dispatch(logout());
   }
 };
-const loginWithEmail = ({email, password}) => async (dispatch) => {
-  try {
-    dispatch({ type: types.LOGIN_REQUEST });
-    sessionStorage.removeItem("token");
-    const response = await api.post("/auth/login",{email, password});
-    if (response.status !== 200) throw new Error(response.error);
-    sessionStorage.setItem("token", response.data.token);
-    dispatch({
-      type: types.LOGIN_SUCCESS,
-      payload: response.data
-    });
-  } catch (error) {
-    dispatch({ type: types.LOGIN_FAIL, payload: error.error });
-    dispatch(commonUiActions.showToastMessage(error.error, "error"));
-  }
-};
+const loginWithEmail =
+  ({ email, password }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: types.LOGIN_REQUEST });
+      sessionStorage.removeItem("token");
+      const response = await api.post("/auth/login", { email, password });
+      if (response.status !== 200) throw new Error(response.error);
+      sessionStorage.setItem("token", response.data.token);
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({ type: types.LOGIN_FAIL, payload: error.error });
+      dispatch(commonUiActions.showToastMessage(error.error, "error"));
+    }
+  };
 const logout = () => async (dispatch) => {
-// user정보 지우기
   dispatch({ type: types.LOGOUT });
-// session token값 지우기
   sessionStorage.removeItem("token");
 };
 

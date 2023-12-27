@@ -23,17 +23,14 @@ const RegisterPage = () => {
     const { name, email, password, confirmPassword, policy } = formData;
     const checkConfirmPassword = password === confirmPassword;
 
-    // 비번 중복 확인
     if (!checkConfirmPassword) {
       setPasswordError("비밀번호 중복확인이 일치하지 않습니다.");
       return;
     }
-    // 이용약관 체크 확인 
     if (!policy) {
       setPolicyError(true);
       return;
     }
-    // FormData에 있는값을 가지고 백엔드로 넘겨주기
     setPasswordError("");
     setPolicyError(false);
     dispatch(userActions.registerUser({ name, email, password }, navigate));

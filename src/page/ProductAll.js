@@ -10,7 +10,7 @@ const ProductAll = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.productList);
   const [query, setQuery] = useSearchParams();
- 
+
   const name = query.get("name");
   useEffect(() => {
     dispatch(
@@ -19,7 +19,7 @@ const ProductAll = () => {
       })
     );
   }, [query]);
-  
+
   return (
     <Container>
       <Row>

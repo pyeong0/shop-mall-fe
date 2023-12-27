@@ -8,10 +8,9 @@ const getProductList = (query) => async (dispatch) => {
     const response = await api.get("/product", {
       params: { ...query },
     });
-    console.log("rrr",response);
+    console.log("rrr", response);
     if (response.status !== 200) throw new Error(response.error);
     dispatch({ type: types.PRODUCT_GET_SUCCESS, payload: response.data });
-    // console.log("response",response.data.data); 
   } catch (error) {
     dispatch({ type: types.PRODUCT_GET_FAIL, payload: error.error });
     dispatch(commonUiActions.showToastMessage(error.error, "error"));
@@ -38,8 +37,9 @@ const createProduct = (formData) => async (dispatch) => {
     const response = await api.post("/product", formData);
     if (response.status !== 200) throw new Error(response.error);
     dispatch({
-      type: types.PRODUCT_CREATE_SUCCESS});
-      dispatch(commonUiActions.showToastMessage("상품 생성 완료", "success"));
+      type: types.PRODUCT_CREATE_SUCCESS,
+    });
+    dispatch(commonUiActions.showToastMessage("상품 생성 완료", "success"));
 
     dispatch(getProductList({ page: 1 }));
   } catch (error) {

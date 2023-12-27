@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
+import Event from "../routes/Event.js";
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
@@ -18,11 +19,10 @@ const Navbar = ({ user }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
-    "스웨터",
-    "셔츠",
-    "자켓",
-    "코트",
-    "Sale",
+    // "Home",
+    // "Event",
+    { name: "Home", path: "/" },
+    { name: "Event", path: "/event" },
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
@@ -66,7 +66,9 @@ const Navbar = ({ user }) => {
 
         <div className="side-menu-list" id="menu-list">
           {menuList.map((menu, index) => (
-            <button key={index}>{menu}</button>
+            <button key={index} onClick={() => navigate(menu.path)}>
+              {menu.name}
+            </button>
           ))}
         </div>
       </div>
@@ -120,17 +122,24 @@ const Navbar = ({ user }) => {
       </div>
 
       <div className="nav-logo">
-        <Link to="/">
-          <img width={100} src="/image/bg-logo.jpg" alt="bg-logo.jpg" />
-        </Link>
+        <div className="nav-logos">
+          <Link to="/">
+            <img width={100} src="/image/bg-logo.png" alt="bg-logo.png" />
+          </Link>
+        </div>
       </div>
       <div className="nav-menu-area">
         <ul className="menu">
-          {menuList.map((menu, index) => (
-            <li key={index}>
-              <a href="#">{menu}</a>
-            </li>
-          ))}
+          <li className="menu-item" onClick={() => navigate("/")}>
+            Home
+          </li>
+          <li
+            className="menu-item"
+            onClick={() => navigate("/event")}
+            style={{ color: "red" }}
+          >
+            Event
+          </li>
         </ul>
         {!isMobile && ( // admin페이지에서 같은 search-box스타일을 쓰고있음 그래서 여기서 서치박스 안보이는것 처리를 해줌
           <div className="search-box landing-search-box ">

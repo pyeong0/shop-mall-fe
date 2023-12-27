@@ -19,7 +19,7 @@ const InitialFormData = {
   price: 0,
 };
 const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
-  const {selectedProduct} = useSelector((state) => state.product);
+  const { selectedProduct } = useSelector((state) => state.product);
 
   const { error } = useSelector((state) => state.product);
   const [formData, setFormData] = useState(
@@ -56,7 +56,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
       );
     }
   };
-//수정필요? 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.id]: event.target.value });
   };

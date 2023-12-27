@@ -10,9 +10,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { commonUiActions } from "../action/commonUiAction";
 import ProductTable from "../component/ProductTable";
 
-
 const AdminProduct = () => {
- 
   const navigate = useNavigate();
   const [query, setQuery] = useSearchParams();
   const dispatch = useDispatch();
@@ -36,11 +34,10 @@ const AdminProduct = () => {
     "Status",
     "",
   ];
-  
 
   useEffect(() => {
     dispatch(productActions.getProductList({ ...searchQuery }));
-  }, [query]);  //수정필요?  [query] -> [dispatch, searchQuery]
+  }, [query]); //수정필요?  [query] -> [dispatch, searchQuery]
 
   useEffect(() => {
     if (searchQuery.name === "") {
@@ -97,7 +94,7 @@ const AdminProduct = () => {
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={totalPageNum} // 전체페이지
-          forcePage={searchQuery.page-1} // 1페이지면 2입력  한개씩 +1 해야함
+          forcePage={searchQuery.page - 1} // 1페이지면 2입력  한개씩 +1 해야함
           previousLabel="< previous"
           renderOnZeroPageCount={null}
           pageClassName="page-item"

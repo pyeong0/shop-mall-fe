@@ -19,6 +19,16 @@ const ProductDetail = () => {
   const [sizeError, setSizeError] = useState(false);
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+  let [thumb, setThumb] = useState(0);
+  let [heart, setHeart] = useState(0);
+  let [sad, setSad] = useState(0);
+  let [alert, setAlert] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert(false);
+    }, 5000);
+  }, []);
 
   const addItemToCart = () => {
     if (size === "") {
@@ -55,6 +65,9 @@ const ProductDetail = () => {
     );
   return (
     <Container className="product-detail-card">
+      {alert == true ? (
+        <div className="alert alert-warning">5초이내 구매시 10%할인</div>
+      ) : null}
       <Row>
         <Col sm={6}>
           <img src={selectedProduct.image} className="w-100" alt="image" />
@@ -102,6 +115,35 @@ const ProductDetail = () => {
           <Button variant="dark" className="add-button" onClick={addItemToCart}>
             추가
           </Button>
+          <h4 className="emoticon">
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                setThumb(thumb + 1);
+              }}
+            >
+              👍
+            </span>
+            {thumb}
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                setHeart(heart + 1);
+              }}
+            >
+              💖
+            </span>
+            {heart}
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                setSad(sad + 1);
+              }}
+            >
+              😂
+            </span>
+            {sad}
+          </h4>
         </Col>
       </Row>
     </Container>

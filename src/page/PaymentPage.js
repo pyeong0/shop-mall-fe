@@ -46,7 +46,6 @@ const PaymentPage = () => {
     event.preventDefault();
     const { firstName, lastName, contact, address, city, zip } = shipInfo;
 
-   
     dispatch(
       orderActions.createOrder({
         shipTo: { address, city, zip },

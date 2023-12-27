@@ -12,7 +12,7 @@ const initialState = {
   selectedItem: {},
   cartItemCount: 0,
   totalPrice: 0,
-  cartItemQty:0
+  cartItemQty: 0,
 };
 
 function cartReducer(state = initialState, action) {
